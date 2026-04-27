@@ -38,6 +38,9 @@ export default defineConfig({
     outDir: '../../dist/client',
     emptyOutDir: true,
   },
+  optimizeDeps: {
+    include: ['monaco-editor'],
+  },
   server: {
     proxy: {
       '/api': createProxyConfig(),
@@ -45,6 +48,10 @@ export default defineConfig({
       '/health': createProxyConfig(),
       '/upload': createProxyConfig(),
       '/webhook': createProxyConfig(),
+      '/socket.io': {
+        target: BACKEND,
+        ws: true,
+      },
     },
   },
 })
